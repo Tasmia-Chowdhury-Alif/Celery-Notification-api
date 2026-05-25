@@ -1,0 +1,66 @@
+# ==============================
+# Python / Django
+# ==============================
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pot
+*.pyc
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.pyre/
+.coverage
+coverage.xml
+*.log
+
+# ==============================
+# Virtual Environments
+# ==============================
+venv/
+.venv/
+env/
+ENV/
+
+# ==============================
+# Environment Variables (Critical)
+# ==============================
+.env
+.env.*
+!.env.example
+
+# ==============================
+# Django Specific
+# ==============================
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+collected_static/
+
+# ==============================
+# Migrations (Optional - usually committed)
+# ==============================
+# */migrations/0*.py
+# */migrations/__pycache__/
+
+# ==============================
+# Docker
+# ==============================
+postgres_data/
+*.dockerignore
+
+# ==============================
+# IDE / Editor
+# ==============================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ==============================
+# OS
+# ==============================
+.DS_Store
+Thumbs.db
