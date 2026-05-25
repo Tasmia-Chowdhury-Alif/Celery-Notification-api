@@ -42,7 +42,7 @@ MIDDLEWARE = [
 
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -108,7 +108,7 @@ else:
 AUTH_USER_MODEL = 'users.User' 
 
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'Asia/Dhaka' 
+TIME_ZONE = 'UTC' 
 USE_I18N = True
 USE_TZ = True
 
