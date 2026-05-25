@@ -1,4 +1,4 @@
-# Celery_Notification_API
+# Celery Notification API
 
 A robust **Django + Celery** based background job notification system that allows users to schedule, manage, and track notifications with retry logic and proper failure handling.
 
