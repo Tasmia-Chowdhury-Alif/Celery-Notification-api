@@ -1,9 +1,7 @@
-```markdown
 # 📋 Project Commands Guide
 
 **Celery_Notification_API** - Django + Celery Background Notification System
 
----
 
 ## 🛠 Local Development Setup
 
@@ -29,7 +27,6 @@ pip install -r requirements.txt
 gunicorn notification_system.wsgi:application --bind 0.0.0.0:8000
 ```
 
----
 
 ## 🐳 Docker Commands (Recommended)
 
@@ -60,7 +57,6 @@ docker-compose up --build --force-recreate
 docker-compose restart web
 ```
 
----
 
 ## 🔧 Django Management Commands
 
@@ -79,7 +75,6 @@ docker-compose exec web python manage.py collectstatic --noinput
 docker-compose exec web python manage.py shell
 ```
 
----
 
 ## 📊 Celery & Logging
 
@@ -94,7 +89,6 @@ docker-compose logs -f celery
 docker-compose restart celery
 ```
 
----
 
 ## 🔄 Other Useful Commands
 
@@ -109,15 +103,12 @@ docker-compose exec web bash
 docker-compose down -v && docker-compose up --build
 ```
 
----
 
 **Tip**: Always check container logs if something goes wrong:
 ```bash
 docker-compose logs -f web
 ```
 
----
 
 **Note**: This project uses local PostgreSQL in development and external services (Neon + Upstash) in production via environment variables.
 
-```
