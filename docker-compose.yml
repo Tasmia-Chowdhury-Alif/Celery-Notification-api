@@ -39,7 +39,7 @@ services:
   celery:
     build: .
     container_name: celery_worker
-    command: celery -A notification_system worker --loglevel=info
+    command: celery -A notification_system worker --loglevel=info --pool=solo # --pool=solo is more stable on Render free tier.
     volumes:
       - .:/app
     env_file:
