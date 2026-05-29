@@ -16,4 +16,4 @@ EXPOSE 8000
 
 # Run migrations and start server
 # CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
-CMD ["sh", "-c", "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn notification_system.wsgi:application --bind 0.0.0.0:$PORT --workers 2"]
+CMD ["sh", "-c", "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn notification_system.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --timeout 120"]
