@@ -237,3 +237,12 @@ LOGGING = {
         },
     },
 }
+
+
+# Railway Specific
+if os.getenv('RAILWAY_ENVIRONMENT'):
+    DEBUG = False
+    ALLOWED_HOSTS = ['.railway.app', '.up.railway.app']
+    
+# Security
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
