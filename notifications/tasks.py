@@ -73,5 +73,5 @@ def send_notification_task(self, notification_id):
         else:
             notification.status = 'failed'
             notification.save()
-            logger.warning(f"🔄 Retrying notification {notification_id}...")
-            raise self.retry(exc=exc)
+            # logger.warning(f"🔄 Retrying notification {notification_id}...")
+            # raise self.retry(exc=exc)
