@@ -6,6 +6,7 @@ All times are in UTC.
 """
 
 import logging
+import requests
 from celery import shared_task
 from django.core.mail import send_mail
 from django.conf import settings
@@ -38,13 +39,47 @@ def send_notification_task(self, notification_id):
             logger.warning(f"⚠️ Notification {notification_id} is being processed too early")
 
         # Send Email
-        send_mail(
-            subject=notification.title,
-            message=notification.message,
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[notification.user.email],
-            fail_silently=False,
+        # send_mail(
+        #     subject=notification.title,
+        #     message=notification.message,
+        #     from_email=settings.DEFAULT_FROM_EMAIL,
+        #     recipient_list=[notification.user.email],
+        #     fail_silently=False,
+        # )
+
+        # API Request Payload
+        payload = {
+            "to_email": notification.user.email,
+            "subject": notification.title,
+            "message": notification.message,
+        }
+
+        # API Headers
+        headers = {
+            "x-api-key": settings.EMAIL_API_KEY,
+            "Content-Type": "application/json",
+        }
+
+        logger.info(
+            f"📤 Sending request to external send email API..."
         )
+
+        response = requests.post(
+            settings.EMAIL_API_URL,
+            json=payload,
+            headers=headers,
+            timeout=15,
+        )
+
+        # Raise error for non-2xx responses
+        response.raise_for_status()
+
+        response_data = response.json()
+
+        logger.info(
+            f"✅ Email API Response: {response_data}"
+        )
+
 
         # Mark as sent
         notification.status = 'sent'
