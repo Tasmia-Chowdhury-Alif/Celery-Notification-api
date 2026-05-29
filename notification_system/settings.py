@@ -1,4 +1,5 @@
 import os
+import dj_database_url
 from pathlib import Path
 from dotenv import load_dotenv
 from urllib.parse import urlparse, parse_qsl
@@ -78,29 +79,25 @@ if PRODUCTION:
     if not DATABASE_URL:
         raise ValueError("DATABASE_URL is required in PRODUCTION mode")
 
-    postgresDB = urlparse(DATABASE_URL)
-
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': postgresDB.path.replace('/', ''),
-            'USER': postgresDB.username,
-            'PASSWORD': postgresDB.password,
-            'HOST': postgresDB.hostname,
-            'PORT': 5432,
-            'OPTIONS': dict(parse_qsl(postgresDB.query)),
-        }
+        'default': dj_database_url.config(
+            default=os.getenv('DATABASE_URL'),
+            conn_max_age=600,           # Keep connections alive
+            conn_health_checks=True,    # Recommended for Neon
+            ssl_require=True,           # Important for Neon
+        )
     }
 
 else:
+    # Local development with docker-compose
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('DB_NAME'),
-            'USER': os.getenv('DB_USER'),
-            'PASSWORD': os.getenv('DB_PASSWORD'),
-            'HOST': os.getenv('DB_HOST'),
-            'PORT': os.getenv('DB_PORT'),
+            'NAME': os.getenv('DB_NAME', 'notification_db'),
+            'USER': os.getenv('DB_USER', 'postgres'),
+            'PASSWORD': os.getenv('DB_PASSWORD', 'postgres123'),
+            'HOST': os.getenv('DB_HOST', 'localhost'),
+            'PORT': os.getenv('DB_PORT', '5432'),
         }
     }
 
