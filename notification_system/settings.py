@@ -129,6 +129,9 @@ EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
+EMAIL_API_URL = os.getenv("EMAIL_API_URL")
+EMAIL_API_KEY = os.getenv("EMAIL_API_KEY")
+
 # REST Framework + JWT + Djoser
 REST_FRAMEWORK = {
     # Currently paused for testing easyly
